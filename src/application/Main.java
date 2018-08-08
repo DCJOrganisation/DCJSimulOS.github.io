@@ -21,6 +21,7 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ProgressIndicator;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TableView;
@@ -139,10 +140,14 @@ public class Main extends Application{
 			label11.setFont(Font.font("Cambria", 32));
 			label_vbox.setPadding(new Insets(3, 5, 0, 5));
 			label_vbox.setSpacing(5);
-			TextArea label_bottom = new TextArea();
-			label_bottom.setText("textload");
-			label_bottom.setPadding(new Insets(2, 2, 2, 2));
-			VBox.setMargin(label_bottom, new Insets(0, 0, 5, 0));
+			
+			//////////////////////////////////////////////////////////////////////////////
+			ScrollPane s1 = new ScrollPane();
+	        s1.setPrefSize(200, 200);
+			s1.setContent(Display.text());
+			s1.setPadding(new Insets(15, 15, 15, 15));
+			VBox.setMargin(s1, new Insets(2,1,1,1));
+			label_vbox.getChildren().add(s1);
 			TableView<Processus> table = Display.tabview();
 			hbox.setAlignment(Pos.CENTER);
 			HBox.setMargin(table, new Insets(0, 0, 0, 150));
@@ -151,7 +156,7 @@ public class Main extends Application{
 			hbox.getChildren().addAll(label_progress, table);
 			hbox.setPadding(new Insets(7, 5, 5, 5));
 			hbox.setSpacing(5);
-			label_vbox.getChildren().add(label_bottom);
+			label_vbox.setAlignment(Pos.TOP_CENTER);
 			global_vbox.getChildren().addAll(hbox, label_vbox);
 			overview.setContent(global_vbox);
 			overview.setClosable(false);
@@ -178,6 +183,10 @@ public class Main extends Application{
 		help.getItems().add(about);
 		//ajout du menu bar
 		root.setTop(menuBar);
+		
+		///////////////////////////////////////////////////////////////////////////////////////////////////
+		
+		
 
 		//creation d'un tabpane de 2 tab
 		//memoire
