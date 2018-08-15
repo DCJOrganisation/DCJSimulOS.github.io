@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.sun.javafx.geom.Rectangle;
 
+import Sofware.Processus;
 import application.Main;
 import vue.CopyTask;
 import javafx.animation.Animation;
@@ -28,7 +29,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Menu;
-import logiciel.Processus;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ProgressBar;
@@ -256,7 +256,7 @@ public class Display implements Runnable {
         ScrollPane s1 = new ScrollPane();
         s1.setPrefSize(200, 200);
 		s1.setContent(text());
-		s1.setPadding(new Insets(15, 15, 15, 15));
+		s1.setPadding(new Insets(15, 15, 1, 15));
 		label_vbox.getChildren().add(s1);
 		global_vbox.getChildren().addAll(root, hbox, label_vbox );
 		overview.setContent(global_vbox);

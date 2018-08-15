@@ -3,6 +3,11 @@ package application;
 import java.io.File;
 import java.util.List;
 
+import Hardware.CPU;
+import Sofware.AddProcess;
+import Sofware.EventManage;
+import Sofware.GestionRessource;
+import Sofware.Processus;
 import javafx.animation.ParallelTransition;
 import javafx.animation.PathTransition;
 import javafx.animation.Timeline;
@@ -10,7 +15,6 @@ import javafx.animation.PathTransition.OrientationType;
 import javafx.application.Application;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.EventHandler;
-import logiciel.Processus;
 import javafx.geometry.Insets;
 import javafx.geometry.NodeOrientation;
 import javafx.geometry.Pos;
@@ -205,6 +209,17 @@ public class Main extends Application{
 		//processus.init_process();
 		primaryStage.setResizable(false);
 		primaryStage.show();
+		////////////////////////////////////////////////////////////////////////////////////
+		EventManage event=new EventManage();
+		AddProcess add=new AddProcess(event);
+		GestionRessource gest=new GestionRessource(event);
+		//GenerateEvent t1=new GenerateEvent();
+		CPU t2=new CPU(event);
+		
+		add.start();
+		t2.start();
+		gest.stop();
+		
 	}
 
 
