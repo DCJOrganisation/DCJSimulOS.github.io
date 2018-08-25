@@ -8,6 +8,7 @@ import Sofware.GestionRessource;
 import Sofware.MMU;
 import Sofware.PCB;
 import Sofware.Process;
+import javafx.scene.Node;
 
 public class EventManage {
 	
@@ -309,4 +310,5 @@ public class EventManage {
 	public void setAddress(int address) {
 		this.address = address;
 	}
+	
 }

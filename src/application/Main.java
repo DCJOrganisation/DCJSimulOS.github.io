@@ -13,6 +13,7 @@ import javafx.animation.PathTransition;
 import javafx.animation.Timeline;
 import javafx.animation.PathTransition.OrientationType;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -148,6 +149,7 @@ public class Main extends Application{
 			//////////////////////////////////////////////////////////////////////////////
 			ScrollPane s1 = new ScrollPane();
 	        s1.setPrefSize(200, 200);
+	        s1.setVvalue(1.0);
 			s1.setContent(Display.text());
 			s1.setPadding(new Insets(15, 15, 15, 15));
 			VBox.setMargin(s1, new Insets(2,1,1,1));
@@ -178,7 +180,7 @@ public class Main extends Application{
 		MenuItem exit = new MenuItem("Exit");
 		exit.setOnAction(e->{System.exit(0);});
 		MenuItem about = new MenuItem("About DCJSimulOS");
-		about.setOnAction(e->{System.out.println("en cours...");});
+		about.setOnAction(e->{Main.println("en cours...");});
 		menuBar.getMenus().add(file);
 		menuBar.getMenus().add(help);
 		file.getItems().add(start);
@@ -219,8 +221,17 @@ public class Main extends Application{
 		add.start();
 		t2.start();
 		gest.stop();
-		
+			
 	}
-
-
+	
+	public static void println(String s){
+	    Platform.runLater(new Runnable() {//in case you call from other thread
+	        @Override
+	        public void run() {
+            Display.text().setText(Display.text().getText()+s+"\n");
+            System.out.println(s);//for echo if you want
+	        }
+	    });
+	}
+	
 }

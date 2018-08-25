@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.sun.javafx.geom.Rectangle;
 
-import Sofware.Processus;
 import application.Main;
 import vue.CopyTask;
 import javafx.animation.Animation;
@@ -14,6 +13,7 @@ import javafx.animation.PathTransition;
 import javafx.animation.Timeline;
 import javafx.animation.Transition;
 import javafx.animation.PathTransition.OrientationType;
+import javafx.application.Platform;
 import javafx.beans.property.Property;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -57,6 +57,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextBuilder;
 import javafx.util.Duration;
+import Sofware.*;
 ;
 
 public class Display implements Runnable {
@@ -71,7 +72,7 @@ public class Display implements Runnable {
 		MenuItem exit = new MenuItem("Exit");
 		exit.setOnAction(e->{System.exit(0);});
 		MenuItem about = new MenuItem("About DCJSimulOS");
-		about.setOnAction(e->{System.out.println("en cours...");});
+		about.setOnAction(e->{Main.println("en cours...");});
 		menuBar.getMenus().add(file);
 		menuBar.getMenus().add(help);
 		file.getItems().add(start);
@@ -254,6 +255,7 @@ public class Display implements Runnable {
 		hbox.setPadding(new Insets(7, 5, 5, 5));
 		hbox.setSpacing(5);
         ScrollPane s1 = new ScrollPane();
+        s1.setVvalue(1);
         s1.setPrefSize(200, 200);
 		s1.setContent(text());
 		s1.setPadding(new Insets(15, 15, 1, 15));
@@ -283,25 +285,22 @@ public class Display implements Runnable {
 		label_vbox.setPadding(new Insets(3, 5, 0, 5));
 		label_vbox.setSpacing(5);
 		//////////////////////////////////////////////////////////////////////////////////////////////////
-		final TextArea textArea = TextAreaBuilder.create()
-				.prefWidth(400)
-				.wrapText(true)
-				.build();
-
-		ScrollPane scrollPane = new ScrollPane();
-		scrollPane.setContent(textArea);
-		scrollPane.setFitToWidth(true);
-		scrollPane.setPrefWidth(400);
-		scrollPane.setPrefHeight(180);
-
-		VBox vBox = VBoxBuilder.create()
-				.children(scrollPane)
-				.build();
+	
+//		ScrollPane scrollPane = new ScrollPane();
+//		scrollPane.setContent(textarea());
+//		scrollPane.setFitToWidth(true);
+//		scrollPane.setPrefWidth(400);
+//		scrollPane.setPrefHeight(180);
+//
+//		VBox vBox = VBoxBuilder.create()
+//				.children(scrollPane)
+//				.build();
 		///////////////////////////////////////////////////////////////////////////////////////////////////
 		ScrollPane s1 = new ScrollPane();
         s1.setPrefSize(200, 200);
 		s1.setContent(Display.text2());
 		s1.setPadding(new Insets(15, 15, 15, 15));
+		s1.setVvalue(1);
 		VBox.setMargin(s1, new Insets(1,1,1,1));
 		label_vbox.getChildren().add(s1);
 		TableView<Processus> table = tabview();
@@ -381,18 +380,659 @@ public class Display implements Runnable {
 	
 	
 	public static Text text2() {
-		final String content = "WELCOME TO DCJSimulOS\n"
-				+ "Go to the menu bar file click on start to launch the simulation\n"
-				+ "\nmmmmmmmmm"
-				+ "\nmmmmmmmmmmmmmmmmmmmmmmmmmmm"
-				+ "\nmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm"
-				+ "\nmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm"
-				+ "\nmmmmmmmmmm";
+		final String content = "Creation du processus 0 de taille 10 et de niveau priorite 1 \r\n" + 
+				"Creation d'un nouveau processus\r\n" + 
+				"Espace suffisant\r\n" + 
+				"processus de PID generer0\r\n" + 
+				"Etat de la moire. Les cases ayant pour valuer -1 sont vides\r\n" + 
+				"Case[0]=0\r\n" + 
+				"Case[1]=0\r\n" + 
+				"Case[2]=0\r\n" + 
+				"Case[3]=0\r\n" + 
+				"Case[4]=0\r\n" + 
+				"Case[5]=0\r\n" + 
+				"Case[6]=0\r\n" + 
+				"Case[7]=0\r\n" + 
+				"Case[8]=0\r\n" + 
+				"Case[9]=0\r\n" + 
+				"Case[10]=-1\r\n" + 
+				"Case[11]=-1\r\n" + 
+				"Case[12]=-1\r\n" + 
+				"Case[13]=-1\r\n" + 
+				"Case[14]=-1\r\n" + 
+				"Case[15]=-1\r\n" + 
+				"Case[16]=-1\r\n" + 
+				"Case[17]=-1\r\n" + 
+				"Case[18]=-1\r\n" + 
+				"Case[19]=-1\r\n" + 
+				"Case[20]=-1\r\n" + 
+				"Case[21]=-1\r\n" + 
+				"Case[22]=-1\r\n" + 
+				"Case[23]=-1\r\n" + 
+				"Case[24]=-1\r\n" + 
+				"Case[25]=-1\r\n" + 
+				"Case[26]=-1\r\n" + 
+				"Case[27]=-1\r\n" + 
+				"Case[28]=-1\r\n" + 
+				"Case[29]=-1\r\n" + 
+				"Case[30]=-1\r\n" + 
+				"Case[31]=-1\r\n" + 
+				"Case[32]=-1\r\n" + 
+				"Case[33]=-1\r\n" + 
+				"Case[34]=-1\r\n" + 
+				"Case[35]=-1\r\n" + 
+				"Case[36]=-1\r\n" + 
+				"Case[37]=-1\r\n" + 
+				"Case[38]=-1\r\n" + 
+				"Case[39]=-1\r\n" + 
+				"Case[40]=-1\r\n" + 
+				"Case[41]=-1\r\n" + 
+				"Case[42]=-1\r\n" + 
+				"Case[43]=-1\r\n" + 
+				"Case[44]=-1\r\n" + 
+				"Case[45]=-1\r\n" + 
+				"Case[46]=-1\r\n" + 
+				"Case[47]=-1\r\n" + 
+				"Case[48]=-1\r\n" + 
+				"Case[49]=-1\r\n" + 
+				"Case[50]=-1\r\n" + 
+				"Case[51]=-1\r\n" + 
+				"Case[52]=-1\r\n" + 
+				"Case[53]=-1\r\n" + 
+				"Case[54]=-1\r\n" + 
+				"Case[55]=-1\r\n" + 
+				"Case[56]=-1\r\n" + 
+				"Case[57]=-1\r\n" + 
+				"Case[58]=-1\r\n" + 
+				"Case[59]=-1\r\n" + 
+				"Case[60]=-1\r\n" + 
+				"Case[61]=-1\r\n" + 
+				"Case[62]=-1\r\n" + 
+				"Case[63]=-1\r\n" + 
+				"Case[64]=-1\r\n" + 
+				"Case[65]=-1\r\n" + 
+				"Case[66]=-1\r\n" + 
+				"Case[67]=-1\r\n" + 
+				"Case[68]=-1\r\n" + 
+				"Case[69]=-1\r\n" + 
+				"Case[70]=-1\r\n" + 
+				"Case[71]=-1\r\n" + 
+				"Case[72]=-1\r\n" + 
+				"Case[73]=-1\r\n" + 
+				"Case[74]=-1\r\n" + 
+				"Case[75]=-1\r\n" + 
+				"Case[76]=-1\r\n" + 
+				"Case[77]=-1\r\n" + 
+				"Case[78]=-1\r\n" + 
+				"Case[79]=-1\r\n" + 
+				"Case[80]=-1\r\n" + 
+				"Case[81]=-1\r\n" + 
+				"Case[82]=-1\r\n" + 
+				"Case[83]=-1\r\n" + 
+				"Case[84]=-1\r\n" + 
+				"Case[85]=-1\r\n" + 
+				"Case[86]=-1\r\n" + 
+				"Case[87]=-1\r\n" + 
+				"Case[88]=-1\r\n" + 
+				"Case[89]=-1\r\n" + 
+				"Case[90]=-1\r\n" + 
+				"Case[91]=-1\r\n" + 
+				"Case[92]=-1\r\n" + 
+				"Case[93]=-1\r\n" + 
+				"Case[94]=-1\r\n" + 
+				"Case[95]=-1\r\n" + 
+				"Case[96]=-1\r\n" + 
+				"Case[97]=-1\r\n" + 
+				"Case[98]=-1\r\n" + 
+				"Case[99]=-1\r\n" + 
+				"0\r\n" + 
+				"en cours...\r\n" + 
+				"Utilisation du clavier\r\n" + 
+				"Le process de pid 0occupe la ressource xxxxxx pour une duree de 5 secondes\r\n" + 
+				"Creation du processus 1 de taille 7 et de niveau priorite 3 \r\n" + 
+				"Creation d'un nouveau processus\r\n" + 
+				"Espace suffisant\r\n" + 
+				"processus de PID generer1\r\n" + 
+				"Etat de la moire. Les cases ayant pour valuer -1 sont vides\r\n" + 
+				"Case[0]=0\r\n" + 
+				"Case[1]=0\r\n" + 
+				"Case[2]=0\r\n" + 
+				"1\r\n" + 
+				"Case[3]=0\r\n" + 
+				"Case[4]=0\r\n" + 
+				"Case[5]=0\r\n" + 
+				"Case[6]=0\r\n" + 
+				"Case[7]=0\r\n" + 
+				"Case[8]=0\r\n" + 
+				"Case[9]=0\r\n" + 
+				"Case[10]=1\r\n" + 
+				"Case[11]=1\r\n" + 
+				"Case[12]=1\r\n" + 
+				"Case[13]=1\r\n" + 
+				"Case[14]=1\r\n" + 
+				"Case[15]=1\r\n" + 
+				"Case[16]=1\r\n" + 
+				"Case[17]=-1\r\n" + 
+				"Case[18]=-1\r\n" + 
+				"Case[19]=-1\r\n" + 
+				"Case[20]=-1\r\n" + 
+				"Case[21]=-1\r\n" + 
+				"Case[22]=-1\r\n" + 
+				"Case[23]=-1\r\n" + 
+				"Case[24]=-1\r\n" + 
+				"Case[25]=-1\r\n" + 
+				"Case[26]=-1\r\n" + 
+				"Case[27]=-1\r\n" + 
+				"Case[28]=-1\r\n" + 
+				"Case[29]=-1\r\n" + 
+				"Case[30]=-1\r\n" + 
+				"Case[31]=-1\r\n" + 
+				"Case[32]=-1\r\n" + 
+				"Case[33]=-1\r\n" + 
+				"Case[34]=-1\r\n" + 
+				"Case[35]=-1\r\n" + 
+				"Case[36]=-1\r\n" + 
+				"Case[37]=-1\r\n" + 
+				"Case[38]=-1\r\n" + 
+				"Case[39]=-1\r\n" + 
+				"Case[40]=-1\r\n" + 
+				"Case[41]=-1\r\n" + 
+				"Case[42]=-1\r\n" + 
+				"Case[43]=-1\r\n" + 
+				"Case[44]=-1\r\n" + 
+				"Case[45]=-1\r\n" + 
+				"Case[46]=-1\r\n" + 
+				"Case[47]=-1\r\n" + 
+				"Case[48]=-1\r\n" + 
+				"Case[49]=-1\r\n" + 
+				"Case[50]=-1\r\n" + 
+				"Case[51]=-1\r\n" + 
+				"Case[52]=-1\r\n" + 
+				"Case[53]=-1\r\n" + 
+				"Case[54]=-1\r\n" + 
+				"Case[55]=-1\r\n" + 
+				"Case[56]=-1\r\n" + 
+				"Case[57]=-1\r\n" + 
+				"Case[58]=-1\r\n" + 
+				"Case[59]=-1\r\n" + 
+				"Case[60]=-1\r\n" + 
+				"Case[61]=-1\r\n" + 
+				"Case[62]=-1\r\n" + 
+				"Case[63]=-1\r\n" + 
+				"Case[64]=-1\r\n" + 
+				"Case[65]=-1\r\n" + 
+				"Case[66]=-1\r\n" + 
+				"Case[67]=-1\r\n" + 
+				"Case[68]=-1\r\n" + 
+				"Case[69]=-1\r\n" + 
+				"Case[70]=-1\r\n" + 
+				"Case[71]=-1\r\n" + 
+				"Case[72]=-1\r\n" + 
+				"Case[73]=-1\r\n" + 
+				"Case[74]=-1\r\n" + 
+				"Case[75]=-1\r\n" + 
+				"Case[76]=-1\r\n" + 
+				"Case[77]=-1\r\n" + 
+				"Case[78]=-1\r\n" + 
+				"Case[79]=-1\r\n" + 
+				"Case[80]=-1\r\n" + 
+				"Case[81]=-1\r\n" + 
+				"Case[82]=-1\r\n" + 
+				"Case[83]=-1\r\n" + 
+				"Case[84]=-1\r\n" + 
+				"Case[85]=-1\r\n" + 
+				"Case[86]=-1\r\n" + 
+				"Case[87]=-1\r\n" + 
+				"Case[88]=-1\r\n" + 
+				"Case[89]=-1\r\n" + 
+				"Case[90]=-1\r\n" + 
+				"Case[91]=-1\r\n" + 
+				"Case[92]=-1\r\n" + 
+				"Case[93]=-1\r\n" + 
+				"Case[94]=-1\r\n" + 
+				"Case[95]=-1\r\n" + 
+				"Case[96]=-1\r\n" + 
+				"Case[97]=-1\r\n" + 
+				"Case[98]=-1\r\n" + 
+				"Case[99]=-1\r\n" + 
+				"Processus termine\r\n" + 
+				"Processus de PID 1 est sorti de la file\r\n" + 
+				"Processus en train d'executer\r\n" + 
+				"Processus en train d'executer\r\n" + 
+				"Demande d'utiliser l'imprimante\r\n" + 
+				"Le process de pid 1occupe la ressource xxxxxx pour une duree de 5 secondes\r\n" + 
+				"Creation du processus 0 de taille 10 et de niveau priorite 1 \r\n" + 
+				"Creation d'un nouveau processus\r\n" + 
+				"Ce processus est deja charge\r\n" + 
+				"en cours...\r\n" + 
+				"Liberation de la ressource xxxx par le processus 0\r\n" + 
+				"Exception in thread \"Thread-7\" java.lang.NullPointerException\r\n" + 
+				"	at Sofware.GestionRessource.run(GestionRessource.java:34)\r\n" + 
+				"Creation du processus 4 de taille 20 et de niveau priorite 4 \r\n" + 
+				"Creation d'un nouveau processus\r\n" + 
+				"Espace suffisant\r\n" + 
+				"processus de PID generer4\r\n" + 
+				"Etat de la moire. Les cases ayant pour valuer -1 sont vides\r\n" + 
+				"Case[0]=0\r\n" + 
+				"4\r\n" + 
+				"Case[1]=0\r\n" + 
+				"Case[2]=0\r\n" + 
+				"Case[3]=0\r\n" + 
+				"Case[4]=0\r\n" + 
+				"Case[5]=0\r\n" + 
+				"Case[6]=0\r\n" + 
+				"Case[7]=0\r\n" + 
+				"Case[8]=0\r\n" + 
+				"Case[9]=0\r\n" + 
+				"Case[10]=1\r\n" + 
+				"Case[11]=4\r\n" + 
+				"Case[12]=4\r\n" + 
+				"Case[13]=4\r\n" + 
+				"Case[14]=4\r\n" + 
+				"Case[15]=4\r\n" + 
+				"Case[16]=4\r\n" + 
+				"Case[17]=4\r\n" + 
+				"Case[18]=4\r\n" + 
+				"Case[19]=4\r\n" + 
+				"Case[20]=4\r\n" + 
+				"Case[21]=4\r\n" + 
+				"Case[22]=4\r\n" + 
+				"Case[23]=4\r\n" + 
+				"Case[24]=4\r\n" + 
+				"Case[25]=4\r\n" + 
+				"Case[26]=4\r\n" + 
+				"Case[27]=4\r\n" + 
+				"Case[28]=4\r\n" + 
+				"Case[29]=4\r\n" + 
+				"Case[30]=4\r\n" + 
+				"Case[31]=-1\r\n" + 
+				"Case[32]=-1\r\n" + 
+				"Case[33]=-1\r\n" + 
+				"Case[34]=-1\r\n" + 
+				"Case[35]=-1\r\n" + 
+				"Case[36]=-1\r\n" + 
+				"Case[37]=-1\r\n" + 
+				"Case[38]=-1\r\n" + 
+				"Case[39]=-1\r\n" + 
+				"Case[40]=-1\r\n" + 
+				"Case[41]=-1\r\n" + 
+				"Case[42]=-1\r\n" + 
+				"Case[43]=-1\r\n" + 
+				"Case[44]=-1\r\n" + 
+				"Case[45]=-1\r\n" + 
+				"Case[46]=-1\r\n" + 
+				"Case[47]=-1\r\n" + 
+				"Case[48]=-1\r\n" + 
+				"Case[49]=-1\r\n" + 
+				"Case[50]=-1\r\n" + 
+				"Case[51]=-1\r\n" + 
+				"Case[52]=-1\r\n" + 
+				"Case[53]=-1\r\n" + 
+				"Case[54]=-1\r\n" + 
+				"Case[55]=-1\r\n" + 
+				"Case[56]=-1\r\n" + 
+				"Case[57]=-1\r\n" + 
+				"Case[58]=-1\r\n" + 
+				"Case[59]=-1\r\n" + 
+				"Case[60]=-1\r\n" + 
+				"Case[61]=-1\r\n" + 
+				"Case[62]=-1\r\n" + 
+				"Case[63]=-1\r\n" + 
+				"Case[64]=-1\r\n" + 
+				"Case[65]=-1\r\n" + 
+				"Case[66]=-1\r\n" + 
+				"Case[67]=-1\r\n" + 
+				"Case[68]=-1\r\n" + 
+				"Case[69]=-1\r\n" + 
+				"Case[70]=-1\r\n" + 
+				"Case[71]=-1\r\n" + 
+				"Case[72]=-1\r\n" + 
+				"Case[73]=-1\r\n" + 
+				"Case[74]=-1\r\n" + 
+				"Case[75]=-1\r\n" + 
+				"Case[76]=-1\r\n" + 
+				"Case[77]=-1\r\n" + 
+				"Case[78]=-1\r\n" + 
+				"Case[79]=-1\r\n" + 
+				"Case[80]=-1\r\n" + 
+				"Case[81]=-1\r\n" + 
+				"Case[82]=-1\r\n" + 
+				"Case[83]=-1\r\n" + 
+				"Case[84]=-1\r\n" + 
+				"Case[85]=-1\r\n" + 
+				"Case[86]=-1\r\n" + 
+				"Case[87]=-1\r\n" + 
+				"Case[88]=-1\r\n" + 
+				"Case[89]=-1\r\n" + 
+				"Case[90]=-1\r\n" + 
+				"Case[91]=-1\r\n" + 
+				"Case[92]=-1\r\n" + 
+				"Case[93]=-1\r\n" + 
+				"Case[94]=-1\r\n" + 
+				"Case[95]=-1\r\n" + 
+				"Case[96]=-1\r\n" + 
+				"Case[97]=-1\r\n" + 
+				"Case[98]=-1\r\n" + 
+				"Case[99]=-1\r\n" + 
+				"Processus termine\r\n" + 
+				"Processus de PID 4 est sorti de la file\r\n" + 
+				"Processus en train d'executer\r\n" + 
+				"Processus en train d'executer\r\n" + 
+				"Processus en train d'executer\r\n" + 
+				"Processus en train d'executer\r\n" + 
+				"Creation du processus 0 de taille 10 et de niveau priorite 1 \r\n" + 
+				"Creation d'un nouveau processus\r\n" + 
+				"Ce processus est deja charge\r\n" + 
+				"Processus en train d'executer\r\n" + 
+				"Liberation de la ressource xxxx par le processus 1\r\n" + 
+				"Exception in thread \"Thread-9\" java.lang.NullPointerException\r\n" + 
+				"	at Sofware.GestionRessource.run(GestionRessource.java:34)\r\n" + 
+				"Processus en train d'executer\r\n" + 
+				"Processus en train d'executer\r\n" + 
+				"Processus en train d'executer\r\n" + 
+				"Processus en train d'executer\r\n" + 
+				"Processus en train d'executer\r\n" + 
+				"Creation du processus 3 de taille 12 et de niveau priorite 2 \r\n" + 
+				"Creation d'un nouveau processus\r\n" + 
+				"Espace suffisant\r\n" + 
+				"processus de PID generer3\r\n" + 
+				"Etat de la moire. Les cases ayant pour valuer -1 sont vides\r\n" + 
+				"Case[0]=0\r\n" + 
+				"Case[1]=0\r\n" + 
+				"Case[2]=0\r\n" + 
+				"Case[3]=0\r\n" + 
+				"Case[4]=0\r\n" + 
+				"Case[5]=0\r\n" + 
+				"Case[6]=0\r\n" + 
+				"Case[7]=0\r\n" + 
+				"Case[8]=0\r\n" + 
+				"Case[9]=0\r\n" + 
+				"Case[10]=1\r\n" + 
+				"Case[11]=4\r\n" + 
+				"Case[12]=3\r\n" + 
+				"Case[13]=3\r\n" + 
+				"Case[14]=3\r\n" + 
+				"Case[15]=3\r\n" + 
+				"Case[16]=3\r\n" + 
+				"Case[17]=3\r\n" + 
+				"Case[18]=3\r\n" + 
+				"Case[19]=3\r\n" + 
+				"Case[20]=3\r\n" + 
+				"Case[21]=3\r\n" + 
+				"Case[22]=3\r\n" + 
+				"Case[23]=3\r\n" + 
+				"Case[24]=-1\r\n" + 
+				"Case[25]=-1\r\n" + 
+				"Case[26]=-1\r\n" + 
+				"Case[27]=-1\r\n" + 
+				"Case[28]=-1\r\n" + 
+				"Case[29]=-1\r\n" + 
+				"Case[30]=-1\r\n" + 
+				"Case[31]=-1\r\n" + 
+				"Case[32]=-1\r\n" + 
+				"Case[33]=-1\r\n" + 
+				"Case[34]=-1\r\n" + 
+				"Case[35]=-1\r\n" + 
+				"Case[36]=-1\r\n" + 
+				"Case[37]=-1\r\n" + 
+				"Case[38]=-1\r\n" + 
+				"Case[39]=-1\r\n" + 
+				"Case[40]=-1\r\n" + 
+				"Case[41]=-1\r\n" + 
+				"Case[42]=-1\r\n" + 
+				"Case[43]=-1\r\n" + 
+				"Case[44]=-1\r\n" + 
+				"Case[45]=-1\r\n" + 
+				"Case[46]=-1\r\n" + 
+				"Case[47]=-1\r\n" + 
+				"Case[48]=-1\r\n" + 
+				"Case[49]=-1\r\n" + 
+				"Case[50]=-1\r\n" + 
+				"Case[51]=-1\r\n" + 
+				"Case[52]=-1\r\n" + 
+				"Case[53]=-1\r\n" + 
+				"Case[54]=-1\r\n" + 
+				"Case[55]=-1\r\n" + 
+				"Case[56]=-1\r\n" + 
+				"Case[57]=-1\r\n" + 
+				"Case[58]=-1\r\n" + 
+				"Case[59]=-1\r\n" + 
+				"Case[60]=-1\r\n" + 
+				"Case[61]=-1\r\n" + 
+				"Case[62]=-1\r\n" + 
+				"Case[63]=-1\r\n" + 
+				"Case[64]=-1\r\n" + 
+				"Case[65]=-1\r\n" + 
+				"Case[66]=-1\r\n" + 
+				"Case[67]=-1\r\n" + 
+				"Case[68]=-1\r\n" + 
+				"Case[69]=-1\r\n" + 
+				"Case[70]=-1\r\n" + 
+				"Case[71]=-1\r\n" + 
+				"Case[72]=-1\r\n" + 
+				"Case[73]=-1\r\n" + 
+				"Case[74]=-1\r\n" + 
+				"Case[75]=-1\r\n" + 
+				"Case[76]=-1\r\n" + 
+				"Case[77]=-1\r\n" + 
+				"Case[78]=-1\r\n" + 
+				"Case[79]=-1\r\n" + 
+				"Case[80]=-1\r\n" + 
+				"Case[81]=-1\r\n" + 
+				"Case[82]=-1\r\n" + 
+				"Case[83]=-1\r\n" + 
+				"Case[84]=-1\r\n" + 
+				"Case[85]=-1\r\n" + 
+				"Case[86]=-1\r\n" + 
+				"Case[87]=-1\r\n" + 
+				"Case[88]=-1\r\n" + 
+				"Case[89]=-1\r\n" + 
+				"Case[90]=-1\r\n" + 
+				"Case[91]=-1\r\n" + 
+				"Case[92]=-1\r\n" + 
+				"Case[93]=-1\r\n" + 
+				"Case[94]=-1\r\n" + 
+				"Case[95]=-1\r\n" + 
+				"Case[96]=-1\r\n" + 
+				"Case[97]=-1\r\n" + 
+				"Case[98]=-1\r\n" + 
+				"Case[99]=-1\r\n" + 
+				"Processus en train d'executer\r\n" + 
+				"Utilisation du clavier\r\n" + 
+				"3\r\n" + 
+				"Le process de pid 3occupe la ressource xxxxxx pour une duree de 5 secondes\r\n" + 
+				"Processus en train d'executer\r\n" + 
+				"Processus en train d'executer\r\n" + 
+				"Processus en train d'executer\r\n" + 
+				"Creation du processus 4 de taille 20 et de niveau priorite 4 \r\n" + 
+				"Creation d'un nouveau processus\r\n" + 
+				"Ce processus est deja charge\r\n" + 
+				"Processus en train d'executer\r\n" + 
+				"Processus en train d'executer\r\n" + 
+				"Processus en train d'executer\r\n" + 
+				"Processus en train d'executer\r\n" + 
+				"Processus en train d'executer\r\n" + 
+				"Processus en train d'executer\r\n" + 
+				"Creation du processus 3 de taille 12 et de niveau priorite 2 \r\n" + 
+				"Creation d'un nouveau processus\r\n" + 
+				"Ce processus est deja charge\r\n" + 
+				"Processus en train d'executer\r\n" + 
+				"Processus termine\r\n" + 
+				"Processus de PID 3 est sorti de la file\r\n" + 
+				"Processus en train d'executer\r\n" + 
+				"Processus termine\r\n" + 
+				"Processus de PID 3 est sorti de la file\r\n" + 
+				"Liberation de la ressource xxxx par le processus 3\r\n" + 
+				"Exception in thread \"Thread-11\" java.lang.NullPointerException\r\n" + 
+				"	at Sofware.GestionRessource.run(GestionRessource.java:34)\r\n" + 
+				"Processus en train d'executer\r\n" + 
+				"Creation du processus 0 de taille 10 et de niveau priorite 1 \r\n" + 
+				"Creation d'un nouveau processus\r\n" + 
+				"Ce processus est deja charge\r\n" + 
+				"Processus termine\r\n" + 
+				"Processus de PID 3 est sorti de la file\r\n" + 
+				"Processus en train d'executer\r\n" + 
+				"Processus en train d'executer\r\n" + 
+				"Demande d'acceder a l'ecran\r\n" + 
+				"Processus en train d'executer\r\n" + 
+				"Processus en train d'executer\r\n" + 
+				"Creation du processus 0 de taille 10 et de niveau priorite 1 \r\n" + 
+				"Creation d'un nouveau processus\r\n" + 
+				"Ce processus est deja charge\r\n" + 
+				"Processus en train d'executer\r\n" + 
+				"Demande d'utiliser l'imprimante\r\n" + 
+				"Le process de pid 3occupe la ressource xxxxxx pour une duree de 5 secondes\r\n" + 
+				"Creation du processus 4 de taille 20 et de niveau priorite 4 \r\n" + 
+				"Creation d'un nouveau processus\r\n" + 
+				"Ce processus est deja charge\r\n" + 
+				"Creation du processus 4 de taille 20 et de niveau priorite 4 \r\n" + 
+				"Creation d'un nouveau processus\r\n" + 
+				"Ce processus est deja charge\r\n" + 
+				"Liberation de la ressource xxxx par le processus 3Exception in thread \"Thread-16\" \r\n" + 
+				"java.lang.NullPointerException\r\n" + 
+				"	at Sofware.GestionRessource.run(GestionRessource.java:34)\r\n" + 
+				"Creation du processus 2 de taille 15 et de niveau priorite 5 \r\n" + 
+				"Creation d'un nouveau processus\r\n" + 
+				"Espace suffisant\r\n" + 
+				"processus de PID generer2\r\n" + 
+				"Etat de la moire. Les cases ayant pour valuer -1 sont vides\r\n" + 
+				"2\r\n" + 
+				"Case[0]=0\r\n" + 
+				"Case[1]=0\r\n" + 
+				"Case[2]=0\r\n" + 
+				"Case[3]=0\r\n" + 
+				"Case[4]=0\r\n" + 
+				"Case[5]=0\r\n" + 
+				"Case[6]=0\r\n" + 
+				"Case[7]=0\r\n" + 
+				"Case[8]=0\r\n" + 
+				"Case[9]=0\r\n" + 
+				"Case[10]=1\r\n" + 
+				"Case[11]=4\r\n" + 
+				"Case[12]=3\r\n" + 
+				"Case[13]=2\r\n" + 
+				"Case[14]=2\r\n" + 
+				"Case[15]=2\r\n" + 
+				"Case[16]=2\r\n" + 
+				"Case[17]=2\r\n" + 
+				"Case[18]=2\r\n" + 
+				"Case[19]=2\r\n" + 
+				"Case[20]=2\r\n" + 
+				"Case[21]=2\r\n" + 
+				"Case[22]=2\r\n" + 
+				"Case[23]=2\r\n" + 
+				"Case[24]=2\r\n" + 
+				"Case[25]=2\r\n" + 
+				"Case[26]=2\r\n" + 
+				"Case[27]=2\r\n" + 
+				"Case[28]=-1\r\n" + 
+				"Case[29]=-1\r\n" + 
+				"Case[30]=-1\r\n" + 
+				"Case[31]=-1\r\n" + 
+				"Case[32]=-1\r\n" + 
+				"Case[33]=-1\r\n" + 
+				"Case[34]=-1\r\n" + 
+				"Case[35]=-1\r\n" + 
+				"Case[36]=-1\r\n" + 
+				"Case[37]=-1\r\n" + 
+				"Case[38]=-1\r\n" + 
+				"Case[39]=-1\r\n" + 
+				"Case[40]=-1\r\n" + 
+				"Case[41]=-1\r\n" + 
+				"Case[42]=-1\r\n" + 
+				"Case[43]=-1\r\n" + 
+				"Case[44]=-1\r\n" + 
+				"Case[45]=-1\r\n" + 
+				"Case[46]=-1\r\n" + 
+				"Case[47]=-1\r\n" + 
+				"Case[48]=-1\r\n" + 
+				"Case[49]=-1\r\n" + 
+				"Case[50]=-1\r\n" + 
+				"Case[51]=-1\r\n" + 
+				"Case[52]=-1\r\n" + 
+				"Case[53]=-1\r\n" + 
+				"Case[54]=-1\r\n" + 
+				"Case[55]=-1\r\n" + 
+				"Case[56]=-1\r\n" + 
+				"Case[57]=-1\r\n" + 
+				"Case[58]=-1\r\n" + 
+				"Case[59]=-1\r\n" + 
+				"Case[60]=-1\r\n" + 
+				"Case[61]=-1\r\n" + 
+				"Case[62]=-1\r\n" + 
+				"Case[63]=-1\r\n" + 
+				"Case[64]=-1\r\n" + 
+				"Case[65]=-1\r\n" + 
+				"Case[66]=-1\r\n" + 
+				"Case[67]=-1\r\n" + 
+				"Case[68]=-1\r\n" + 
+				"Case[69]=-1\r\n" + 
+				"Case[70]=-1\r\n" + 
+				"Case[71]=-1\r\n" + 
+				"Case[72]=-1\r\n" + 
+				"Case[73]=-1\r\n" + 
+				"Case[74]=-1\r\n" + 
+				"Case[75]=-1\r\n" + 
+				"Case[76]=-1\r\n" + 
+				"Case[77]=-1\r\n" + 
+				"Case[78]=-1\r\n" + 
+				"Case[79]=-1\r\n" + 
+				"Case[80]=-1\r\n" + 
+				"Case[81]=-1\r\n" + 
+				"Case[82]=-1\r\n" + 
+				"Case[83]=-1\r\n" + 
+				"Case[84]=-1\r\n" + 
+				"Case[85]=-1\r\n" + 
+				"Case[86]=-1\r\n" + 
+				"Case[87]=-1\r\n" + 
+				"Case[88]=-1\r\n" + 
+				"Case[89]=-1\r\n" + 
+				"Case[90]=-1\r\n" + 
+				"Case[91]=-1\r\n" + 
+				"Case[92]=-1\r\n" + 
+				"Case[93]=-1\r\n" + 
+				"Case[94]=-1\r\n" + 
+				"Case[95]=-1\r\n" + 
+				"Case[96]=-1\r\n" + 
+				"Case[97]=-1\r\n" + 
+				"Case[98]=-1\r\n" + 
+				"Case[99]=-1\r\n" + 
+				"Processus termine\r\n" + 
+				"Processus de PID 2 est sorti de la file\r\n" + 
+				"Processus en train d'executer\r\n" + 
+				"Processus en train d'executer\r\n" + 
+				"Processus en train d'executer\r\n" + 
+				"Processus en train d'executer\r\n" + 
+				"Creation du processus 2 de taille 15 et de niveau priorite 5 \r\n" + 
+				"Creation d'un nouveau processus\r\n" + 
+				"Ce processus est deja charge\r\n" + 
+				"Processus en train d'executer\r\n" + 
+				"Utilisation du clavier\r\n" + 
+				"Le process de pid 2occupe la ressource xxxxxx pour une duree de 5 secondes\r\n" + 
+				"Creation du processus 2 de taille 15 et de niveau priorite 5 \r\n" + 
+				"Creation d'un nouveau processus\r\n" + 
+				"Ce processus est deja charge\r\n" + 
+				"Creation du processus 4 de taille 20 et de niveau priorite 4 \r\n" + 
+				"Creation d'un nouveau processus\r\n" + 
+				"Ce processus est deja charge\r\n" + 
+				"Liberation de la ressource xxxx par le processus 2\r\n" + 
+				"Exception in thread \"Thread-18\" java.lang.NullPointerException\r\n" + 
+				"	at Sofware.GestionRessource.run(GestionRessource.java:34)\r\n" + 
+				"Creation du processus 0 de taille 10 et de niveau priorite 1 \r\n" + 
+				"Creation d'un nouveau processus\r\n" + 
+				"Ce processus est deja charge\r\n" + 
+				"Creation du processus 3 de taille 12 et de niveau priorite 2 \r\n" + 
+				"Creation d'un nouveau processus\r\n" + 
+				"Ce processus est deja charge\r\n" + 
+				"Creation du processus 3 de taille 12 et de niveau priorite 2 \r\n" + 
+				"Creation d'un nouveau processus\r\n" + 
+				"Ce processus est deja charge\r\n" + 
+				"";
 		final Text text = new Text(10, 20, "");
 
 		final Animation animation = new Transition() {
 			{
-				setCycleDuration(Duration.millis(6000));
+				setCycleDuration(Duration.millis(50000));
 			}
 
 			protected void interpolate(double frac) {
