@@ -44,6 +44,8 @@ import javafx.scene.text.Font;
 import javafx.scene.text.TextBuilder;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import vue.AlertAbout;
+import vue.ConfirmBox;
 import vue.CopyTask;
 import vue.Display;
 public class Main extends Application{ 
@@ -60,6 +62,9 @@ public class Main extends Application{
 		Scene scene = new Scene(root, 750, 500, Color.GRAY);
 		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 		primaryStage.setScene(scene);
+		primaryStage.setOnCloseRequest(e->{
+			e.consume();
+			closeprograme();});
 		//ajout d'un bar de menu en haut de notre scene
 
 		MenuBar menuBar = new MenuBar();
@@ -69,18 +74,22 @@ public class Main extends Application{
 		MenuItem cancel = new MenuItem("Cancel");
 		cancel.setOnAction(e->{
 			
+			Boolean answer = ConfirmBox.display("Title", "Sure you want to cancel ?");
+			System.out.println(answer);
+			if(answer) {
+
+				TabPane tabpane = new TabPane();
+				//tabpane.setSide(Side.LEFT);
+				tabpane.setNodeOrientation(NodeOrientation.INHERIT);
+				Tab tab_disque = new Tab("Disk");
+				tab_disque.setClosable(false);
+				tabpane.getTabs().setAll(Display.OverView_Init(), Display.tabmemory(), tab_disque);
+				BorderPane.setAlignment(tabpane, Pos.TOP_RIGHT);
+				BorderPane.setMargin(tabpane, new Insets(5, 5, 3, 5));
+				//ajout de notre tabpane a droite de la scene
+				root.setCenter(tabpane);
+			}
 			
-			
-			TabPane tabpane = new TabPane();
-			//tabpane.setSide(Side.LEFT);
-			tabpane.setNodeOrientation(NodeOrientation.INHERIT);
-			Tab tab_disque = new Tab("Disk");
-			tab_disque.setClosable(false);
-			tabpane.getTabs().setAll(Display.OverView_Init(), Display.tabmemory(), tab_disque);
-			BorderPane.setAlignment(tabpane, Pos.TOP_RIGHT);
-			BorderPane.setMargin(tabpane, new Insets(5, 5, 3, 5));
-			//ajout de notre tabpane a droite de la scene
-			root.setCenter(tabpane);
 		});
 		start.setOnAction(e->{
 			final ProgressBar progressBar = new ProgressBar(0);
@@ -178,9 +187,11 @@ public class Main extends Application{
 			root.setCenter(tabpane);
 		});
 		MenuItem exit = new MenuItem("Exit");
-		exit.setOnAction(e->{System.exit(0);});
+		exit.setOnAction(e->{closeprograme();});
 		MenuItem about = new MenuItem("About DCJSimulOS");
-		about.setOnAction(e->{Main.println("en cours...");});
+		about.setOnAction(e->{
+			AlertAbout.display("title", "DESILIAS Dimitry, COVIL Francklin, JOSEPH Jamesly");
+		});
 		menuBar.getMenus().add(file);
 		menuBar.getMenus().add(help);
 		file.getItems().add(start);
@@ -234,4 +245,14 @@ public class Main extends Application{
 	    });
 	}
 	
+	private void closeprograme() {
+		// TODO Auto-generated method stub
+		Boolean answer = ConfirmBox.display("Title", "Sure you want to exit ?");
+		System.out.println(answer);
+		if(answer) {
+			System.exit(0);
+		}
+		
+	}
+		
 }

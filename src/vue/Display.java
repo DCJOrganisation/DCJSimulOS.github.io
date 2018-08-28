@@ -82,13 +82,27 @@ public class Display implements Runnable {
 		return menuBar;
 	}
 
-	public static PieChart pie_chart() {
+	public static PieChart pie_chart_init() {
 		final PieChart chart = new PieChart(); 
 		chart.setPrefSize(100, 100);
 		chart.setLegendSide(Side.LEFT);
 		chart.setLabelLineLength(5);
-		chart.getData().setAll(new PieChart.Data("O/S", 50), new PieChart.Data("P1.exe", 30),  
-				new PieChart.Data("P2.exe", 25), new PieChart.Data("P3.exe", 42), 
+		chart.getData().setAll(new PieChart.Data("", 100)
+				//, new PieChart.Data("P1.exe", 30),  
+//				new PieChart.Data("P2.exe", 25), new PieChart.Data("P3.exe", 42), 
+//				new PieChart.Data("P4.exe", 5) ,new PieChart.Data("P5.exe", 10)
+				); 
+		return chart;	
+	}
+	
+	public static PieChart pie_chart_info() {
+		final PieChart chart = new PieChart(); 
+		chart.setPrefSize(100, 100);
+		chart.setLegendSide(Side.LEFT);
+		chart.setLabelLineLength(5);
+		chart.getData().setAll(new PieChart.Data("O/S", 40)
+				, new PieChart.Data("P1.exe", 17),  
+				new PieChart.Data("P2.exe", 13), new PieChart.Data("P3.exe", 15), 
 				new PieChart.Data("P4.exe", 5) ,new PieChart.Data("P5.exe", 10)
 				); 
 		return chart;	
@@ -255,7 +269,7 @@ public class Display implements Runnable {
 		hbox.setPadding(new Insets(7, 5, 5, 5));
 		hbox.setSpacing(5);
         ScrollPane s1 = new ScrollPane();
-        s1.setVvalue(1);
+        s1.setVvalue(1.0);
         s1.setPrefSize(200, 200);
 		s1.setContent(text());
 		s1.setPadding(new Insets(15, 15, 1, 15));
@@ -297,10 +311,10 @@ public class Display implements Runnable {
 //				.build();
 		///////////////////////////////////////////////////////////////////////////////////////////////////
 		ScrollPane s1 = new ScrollPane();
+		s1.setVvalue(1.0);
         s1.setPrefSize(200, 200);
 		s1.setContent(Display.text2());
 		s1.setPadding(new Insets(15, 15, 15, 15));
-		s1.setVvalue(1);
 		VBox.setMargin(s1, new Insets(1,1,1,1));
 		label_vbox.getChildren().add(s1);
 		TableView<Processus> table = tabview();
@@ -323,7 +337,7 @@ public class Display implements Runnable {
 		final Tab tab_memoireRam = new Tab("Memory");
 		tab_memoireRam.setClosable(false);
 		//on cree un piechart memoire q'on ajoute a la tab memoire
-		tab_memoireRam.setContent(pie_chart());
+		tab_memoireRam.setContent(pie_chart_init());
 		return tab_memoireRam;
 	}
 
