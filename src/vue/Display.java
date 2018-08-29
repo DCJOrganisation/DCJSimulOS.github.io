@@ -100,10 +100,22 @@ public class Display implements Runnable {
 		chart.setPrefSize(100, 100);
 		chart.setLegendSide(Side.LEFT);
 		chart.setLabelLineLength(5);
-		chart.getData().setAll(new PieChart.Data("O/S", 40)
-				, new PieChart.Data("P1.exe", 17),  
-				new PieChart.Data("P2.exe", 13), new PieChart.Data("P3.exe", 15), 
-				new PieChart.Data("P4.exe", 5) ,new PieChart.Data("P5.exe", 10)
+		chart.getData().setAll(new PieChart.Data("", 20)
+				,new PieChart.Data("O/S", 40),  
+				new PieChart.Data("P2.exe", 7), new PieChart.Data("P3.exe", 6), 
+				new PieChart.Data("P4.exe", 8) ,new PieChart.Data("P5.exe", 10),
+				new PieChart.Data("P1.exe", 9)
+				); 
+		return chart;	
+	}
+	
+	public static PieChart pie_chart_OS() {
+		final PieChart chart = new PieChart(); 
+		chart.setPrefSize(100, 100);
+		chart.setLegendSide(Side.LEFT);
+		chart.setLabelLineLength(5);
+		chart.getData().setAll(new PieChart.Data("", 60)
+				,new PieChart.Data("O/S", 40) 
 				); 
 		return chart;	
 	}
@@ -123,7 +135,7 @@ public class Display implements Runnable {
 	public static TableView<Processus> tabview(){
 		TableColumn<Processus, String> nameColumn =new TableColumn<>("Name");
 		nameColumn.setMinWidth(100);
-		nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+		nameColumn.setCellValueFactory(new PropertyValueFactory<>("name_process"));
 		TableColumn<Processus, String> pidColumn =new TableColumn<>("Pid");
 		pidColumn.setMinWidth(100);
 		pidColumn.setCellValueFactory(new PropertyValueFactory<>("pid_process"));
@@ -133,6 +145,24 @@ public class Display implements Runnable {
 		table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 		table.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 		//table.setItems(getProcessus());
+		return table;
+
+
+	}
+	
+	public static TableView<Processus> tabviewInfo(){
+		TableColumn<Processus, String> nameColumn =new TableColumn<>("Name");
+		nameColumn.setMinWidth(100);
+		nameColumn.setCellValueFactory(new PropertyValueFactory<>("name_process"));
+		TableColumn<Processus, String> pidColumn =new TableColumn<>("Pid");
+		pidColumn.setMinWidth(100);
+		pidColumn.setCellValueFactory(new PropertyValueFactory<>("pid_process"));
+		TableView<Processus> table = new TableView<>();
+		table.setItems(getProcessus());
+		table.getColumns().add(pidColumn);
+		table.getColumns().add(nameColumn);
+		table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+		table.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 		return table;
 
 
@@ -317,7 +347,7 @@ public class Display implements Runnable {
 		s1.setPadding(new Insets(15, 15, 15, 15));
 		VBox.setMargin(s1, new Insets(1,1,1,1));
 		label_vbox.getChildren().add(s1);
-		TableView<Processus> table = tabview();
+		TableView<Processus> table = tabviewInfo();
 		hbox.setAlignment(Pos.CENTER_RIGHT);
 		HBox.setMargin(table, new Insets(0, 0, 0, 50));
 		HBox.setMargin(label_io_ready_queue, new Insets(60, 0, 60, 5));
@@ -333,7 +363,7 @@ public class Display implements Runnable {
 	}
 
 
-	public static Tab tabmemory() {
+	public static Tab tabmemoryInit() {
 		final Tab tab_memoireRam = new Tab("Memory");
 		tab_memoireRam.setClosable(false);
 		//on cree un piechart memoire q'on ajoute a la tab memoire
@@ -341,6 +371,22 @@ public class Display implements Runnable {
 		return tab_memoireRam;
 	}
 
+	public static Tab tabmemoryInfo() {
+		final Tab tab_memoireRam = new Tab("Memory");
+		tab_memoireRam.setClosable(false);
+		//on cree un piechart memoire q'on ajoute a la tab memoire
+		tab_memoireRam.setContent(pie_chart_info());
+		return tab_memoireRam;
+	}
+	public static Tab tabmemoryOS() {
+		final Tab tab_memoireRam = new Tab("Memory");
+		tab_memoireRam.setClosable(false);
+		//on cree un piechart memoire q'on ajoute a la tab memoire
+		tab_memoireRam.setContent(pie_chart_OS());
+		return tab_memoireRam;
+	}
+	
+	
 	public static Tab messages() {
 		final Tab tab_messages = new Tab("Messages");
 		tab_messages.setClosable(false);
@@ -356,7 +402,9 @@ public class Display implements Runnable {
 		io_queue.setMinWidth(400);
 		io_queue.setDisable(false);
 		io_queue.setOrientation(Orientation.HORIZONTAL);
-
+		io_queue.setOrientation(Orientation.HORIZONTAL);
+		io_queue.getItems().addAll(new Processus(1,"P1.exe"));
+		io_queue.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		return io_queue;
 	}
 
@@ -367,6 +415,8 @@ public class Display implements Runnable {
 		ready_queue.setMinWidth(400);
 		ready_queue.setDisable(false);
 		ready_queue.setOrientation(Orientation.HORIZONTAL);
+		ready_queue.getItems().addAll(new Processus(1,"P1.exe"));
+		ready_queue.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		return ready_queue;
 	}
 

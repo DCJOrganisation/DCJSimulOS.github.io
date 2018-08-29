@@ -83,7 +83,7 @@ public class Main extends Application{
 				tabpane.setNodeOrientation(NodeOrientation.INHERIT);
 				Tab tab_disque = new Tab("Disk");
 				tab_disque.setClosable(false);
-				tabpane.getTabs().setAll(Display.OverView_Init(), Display.tabmemory(), tab_disque);
+				tabpane.getTabs().setAll(Display.OverView_Init(), Display.tabmemoryInit(), tab_disque);
 				BorderPane.setAlignment(tabpane, Pos.TOP_RIGHT);
 				BorderPane.setMargin(tabpane, new Insets(5, 5, 3, 5));
 				//ajout de notre tabpane a droite de la scene
@@ -121,7 +121,7 @@ public class Main extends Application{
 					tabpane.setNodeOrientation(NodeOrientation.INHERIT);
 					Tab tab_disque = new Tab("Disk");
 					tab_disque.setClosable(false);
-					tabpane.getTabs().setAll(Display.info_Process(), Display.tabmemory(), tab_disque);
+					tabpane.getTabs().setAll(Display.info_Process(), Display.tabmemoryInfo(), tab_disque);
 					BorderPane.setAlignment(tabpane, Pos.TOP_RIGHT);
 					BorderPane.setMargin(tabpane, new Insets(5, 5, 3, 5));
 					//ajout de notre tabpane a droite de la scene
@@ -180,7 +180,7 @@ public class Main extends Application{
 			tabpane.setNodeOrientation(NodeOrientation.INHERIT);
 			Tab tab_disque = new Tab("Disk");
 			tab_disque.setClosable(false);
-			tabpane.getTabs().setAll(overview, Display.tabmemory(), tab_disque);
+			tabpane.getTabs().setAll(overview, Display.tabmemoryOS(), tab_disque);
 			BorderPane.setAlignment(tabpane, Pos.TOP_RIGHT);
 			BorderPane.setMargin(tabpane, new Insets(5, 5, 3, 5));
 			//ajout de notre tabpane a droite de la scene
@@ -212,7 +212,7 @@ public class Main extends Application{
 		tabpane.setNodeOrientation(NodeOrientation.INHERIT);
 		Tab tab_disque = new Tab("Disk");
 		tab_disque.setClosable(false);
-		tabpane.getTabs().setAll(Display.OverView_Init(), Display.tabmemory(), tab_disque);
+		tabpane.getTabs().setAll(Display.OverView_Init(), Display.tabmemoryInit(), tab_disque);
 		BorderPane.setAlignment(tabpane, Pos.TOP_RIGHT);
 		BorderPane.setMargin(tabpane, new Insets(5, 5, 3, 5));
 		//ajout de notre tabpane a droite de la scene
