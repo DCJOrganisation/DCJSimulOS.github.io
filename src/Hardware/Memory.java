@@ -1,5 +1,5 @@
 package Hardware;
-import Sofware.Process;
+import Software.Process;
 
 	public class Memory {
 	private int size;

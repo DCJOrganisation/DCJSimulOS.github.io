@@ -31,7 +31,7 @@ public class CopyTask extends Task<List<File>> {
 
  private void copy(File file) throws Exception {
      this.updateMessage("Copying: " + file.getAbsolutePath());
-     Thread.sleep(500);
+     Thread.sleep(300);
  }
 
 }

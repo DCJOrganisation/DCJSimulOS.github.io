@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.sun.javafx.geom.Rectangle;
 
+import Software.*;
 import application.Main;
 import vue.CopyTask;
 import javafx.animation.Animation;
@@ -57,7 +58,6 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextBuilder;
 import javafx.util.Duration;
-import Sofware.*;
 ;
 
 public class Display implements Runnable {
@@ -427,7 +427,28 @@ public class Display implements Runnable {
 
 		final Animation animation = new Transition() {
 			{
-				setCycleDuration(Duration.millis(6000));
+				setCycleDuration(Duration.millis(10000));
+			}
+
+			protected void interpolate(double frac) {
+				final int length = content.length();
+				final int n = Math.round(length * (float) frac);
+				text.setText(content.substring(0, n));
+			}
+
+		};
+
+		animation.play();
+		return text;
+	}
+	
+	public static Text text_test() {
+		final String content = "DISK -------------------------OK\nCPU -------------------------OK\nLOADING SYSTEM..................................";
+		final Text text = new Text(10, 20, "");
+
+		final Animation animation = new Transition() {
+			{
+				setCycleDuration(Duration.millis(12000));
 			}
 
 			protected void interpolate(double frac) {
@@ -1096,7 +1117,7 @@ public class Display implements Runnable {
 
 		final Animation animation = new Transition() {
 			{
-				setCycleDuration(Duration.millis(50000));
+				setCycleDuration(Duration.millis(70000));
 			}
 
 			protected void interpolate(double frac) {

@@ -1,6 +1,6 @@
 package Hardware;
-import Sofware.EventManage;
-import Sofware.GenerateEvent;
+import Software.EventManage;
+import Software.GenerateEvent;
 
 	public class CPU extends Thread{
 		EventManage event;

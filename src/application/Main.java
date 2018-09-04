@@ -4,10 +4,10 @@ import java.io.File;
 import java.util.List;
 
 import Hardware.CPU;
-import Sofware.AddProcess;
-import Sofware.EventManage;
-import Sofware.GestionRessource;
-import Sofware.Processus;
+import Software.AddProcess;
+import Software.EventManage;
+import Software.GestionRessource;
+import Software.Processus;
 import javafx.animation.ParallelTransition;
 import javafx.animation.PathTransition;
 import javafx.animation.Timeline;
@@ -159,7 +159,7 @@ public class Main extends Application{
 			ScrollPane s1 = new ScrollPane();
 	        s1.setPrefSize(200, 200);
 	        s1.setVvalue(1.0);
-			s1.setContent(Display.text());
+			s1.setContent(Display.text_test());
 			s1.setPadding(new Insets(15, 15, 15, 15));
 			VBox.setMargin(s1, new Insets(2,1,1,1));
 			label_vbox.getChildren().add(s1);
