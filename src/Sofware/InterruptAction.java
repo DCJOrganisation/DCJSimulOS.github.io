@@ -12,6 +12,10 @@ public class InterruptAction {
 	public void setInterrupt(int interrupt) {
 		this.interrupt=interrupt;
 	}
+	
+	public int getInterrupt() {
+		return interrupt;
+	}
 	public void setPid(int pid) {
 		this.pid=pid;
 	}

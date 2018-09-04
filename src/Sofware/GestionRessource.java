@@ -20,7 +20,7 @@ public class GestionRessource extends Thread {
 		this.event=event;
 		
 	}
-	public GestionRessource(int interruptiorn,int pid) {
+	public GestionRessource(int interruption,int pid) {
 
 		inter =new InterruptAction(interruption,pid);
 		interrupt.offer(inter);
@@ -29,10 +29,25 @@ public class GestionRessource extends Thread {
 	
 	
 	public void run() {
-		while(true) {
 		inter=interrupt.poll();
+		if(inter!=null) {
+		
 		int pid=inter.getPid();
-		System.out.println("Le process de pid " +inter.getPid()+"occupe la ressource xxxxxx pour une duree de 5 secondes");
+		int interruption=inter.getInterrupt();
+	
+		String ressource="";
+		
+		switch(interruption) {
+		case 2:
+			ressource="Ecran";
+			break;
+		case 9:
+			ressource="Ecran";
+			break;
+		case 12:
+			ressource="Clavier";
+		}
+		System.out.println("Le process de pid " +inter.getPid()+" occupe la ressource '"+ressource+"' pour une duree de 5 secondes");
 		try {
 			Thread.sleep(5000);
 		}
@@ -40,7 +55,8 @@ public class GestionRessource extends Thread {
 			
 		}
 		
-		System.out.println("Liberation de la ressource xxxx par le processus " +pid);
+		System.out.println("Liberation de la ressource  '"+ressource+"' par le processus " +pid);
+		
 		}
 	}
 
